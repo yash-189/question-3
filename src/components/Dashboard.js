@@ -47,10 +47,11 @@ const Dashboard = () => {
         console.log(employeeList, 'list');
         // setemployeeList({formData,...list})
         // employeeList.push(formData)
-        setemployeeList(prev => [formData, ...prev])
+        setfilterlist(prev => [formData, ...prev])
         setmodal(false)
 
     }
+    const [filterlist, setfilterlist] = useState(employeeList)
 
 
     useEffect(() => {
@@ -61,13 +62,12 @@ const Dashboard = () => {
 
         }
 
-    }, [employeeList])
+    }, [employeeList,filterlist])
 
 
 
 
     const [searchValue, setsearchValue] = useState('')
-    const [filterlist, setfilterlist] = useState(employeeList)
 
     const onchange = (e) => {
         setsearchValue(e.target.value)
@@ -83,7 +83,7 @@ const Dashboard = () => {
 
         let results = list?.filter((x) => {
 
-            return x.name.toLocaleLowerCase().includes('john')
+            return x.name.toLocaleLowerCase().includes(searchValue)
         })
 
         console.log(results, 'search');
@@ -198,9 +198,7 @@ const Dashboard = () => {
                             </button>
 
                         </div>
-                        {employeeList.map((elem) => {
-                            return <h1>{elem.name}</h1>
-                        })}
+                      
 
                     </form>
                 </div>

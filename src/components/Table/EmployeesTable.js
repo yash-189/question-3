@@ -83,6 +83,7 @@ const EmployeesTable = ({ list, setlist }) => {
 
         
         setlist(newState)
+        seteditModal(false)
         setstateforpopup(true)
     };
 

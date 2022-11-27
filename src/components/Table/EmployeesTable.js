@@ -31,6 +31,7 @@ const EmployeesTable = ({ list, setlist }) => {
             })
             console.log(search);
             setparticularEmployee(...search)
+            
 
         }
         if (type == 'checkbox') {

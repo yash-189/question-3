@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import TotalEmpolyee from './Cards/TotalEmpolyee'
+import Popup from './popups/Popup'
 import EmployeesTable from './Table/EmployeesTable'
 
 
@@ -30,6 +31,7 @@ const list = [
 localStorage.setItem('list', JSON.stringify(list))
 
 const Dashboard = () => {
+    const [added, setadded] = useState(false)
 
     const [modal, setmodal] = useState(false)
     const [employeeList, setemployeeList] = useState(JSON.parse(localStorage.getItem('list')) || false)
@@ -49,6 +51,7 @@ const Dashboard = () => {
         // employeeList.push(formData)
         setfilterlist(prev => [formData, ...prev])
         setmodal(false)
+        setadded(true)
 
     }
     const [filterlist, setfilterlist] = useState(employeeList)
@@ -101,13 +104,19 @@ const Dashboard = () => {
     useEffect(() => {
         searchFilter(searchValue)
     }, [searchValue])
-
+    useEffect(() => {
+      setTimeout(() => {
+        setadded(false)
+      }, 3000);
+    }, [added])
+    
 
 
 
 
     return (
         <>
+        {added && <Popup name={'Added Successfully'} textcolor={'text-green-600'} />}
             {modal &&
                 <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-40 bg-black/20 w-full h-full flex justify-center items-center'>
 
@@ -232,7 +241,7 @@ const Dashboard = () => {
 
                     </div>
                     <div className=' flex flex-col sm:flex-row  items-center mt-5'>
-                        <TotalEmpolyee list={employeeList} setlist={setfilterlist} onclick={() => setmodal(true)} />
+                        <TotalEmpolyee list={filterlist} setlist={setfilterlist} onclick={() => setmodal(true)} />
 
                     </div>
 

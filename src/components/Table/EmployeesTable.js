@@ -3,6 +3,8 @@ import React, { useState } from 'react'
 const EmployeesTable = ({ list, setlist }) => {
 
 
+    const [stateforpopup, setstateforpopup] = useState(false)
+    const [deletestate, setdeletestate] = useState(false)
 
     const [editModal, seteditModal] = useState(false)
     const [deleteModal, setdeleteModal] = useState(false)
@@ -31,7 +33,7 @@ const EmployeesTable = ({ list, setlist }) => {
             })
             console.log(search);
             setparticularEmployee(...search)
-            
+
 
         }
         if (type == 'checkbox') {
@@ -55,6 +57,7 @@ const EmployeesTable = ({ list, setlist }) => {
         })
         setlist(search)
         setdeleteModal(false)
+        setstateforpopup(true)
 
     }
 
@@ -83,10 +86,16 @@ const EmployeesTable = ({ list, setlist }) => {
 
         
         setlist(newState)
+        setstateforpopup(true)
         console.log(newState, 'nnnnnnnn');
     };
 
-
+    useEffect(() => {
+        setTimeout(() => {
+          setdeletestate(false)
+          setstateforpopup(false)
+        }, 3000);
+      }, [stateforpopup,deletestate])
 
 
   
@@ -95,6 +104,8 @@ const EmployeesTable = ({ list, setlist }) => {
 
 
         <>
+         {stateforpopup && <Popup name={'Successfully Saved'} textcolor={'text-green-600'} />}
+         {deletestate && <Popup name={'Successfully Deleted'} textcolor={'text-red-600'} />}
 
             {editModal &&
                 <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-40 bg-black/20 w-full h-full flex justify-center items-center'>

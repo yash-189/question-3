@@ -41,14 +41,12 @@ const Dashboard = () => {
 
     const onChange = (e) => {
         setformData({ ...formData, [e.target.id]: e.target.value })
-        console.log(formData, 'jjj', employeeList);
     }
 
     const onSubmit = (e) => {
         e.preventDefault()
         console.log(employeeList, 'list');
-        // setemployeeList({formData,...list})
-        // employeeList.push(formData)
+        
         setfilterlist(prev => [formData, ...prev])
         setmodal(false)
         setadded(true)
@@ -74,7 +72,6 @@ const Dashboard = () => {
 
     const onchange = (e) => {
         setsearchValue(e.target.value)
-        console.log(searchValue, 'search');
 
     }
 
@@ -89,7 +86,6 @@ const Dashboard = () => {
             return x.name.toLocaleLowerCase().includes(searchValue)
         })
 
-        console.log(results, 'search');
 
         if (searchValue == '') {
             setfilterlist(employeeList)

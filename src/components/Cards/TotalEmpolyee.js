@@ -10,7 +10,6 @@ const TotalEmpolyee = ({list,onclick,setlist}) => {
         const filter = list?.filter((item)=>{
             return item.available == true
         })
-        console.log(filter,'jjjkkkk');
         setavailableEmolyee(filter?.length)
 
     }, [list])
